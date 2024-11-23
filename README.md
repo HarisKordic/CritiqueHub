@@ -1,0 +1,1 @@
+# critique-hub-qr-code
