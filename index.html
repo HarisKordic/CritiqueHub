@@ -1,17 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Redirect</title>
-    <script>
-        // Redirect
-        const redirectUrl = "https://www.kali.org/docs/";
-
-        window.location.href = redirectUrl;
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save Email to Firebase</title>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js"></script>
 </head>
 <body>
-    <p>Redirecting to CritiqueHub</p>
+  <h1>Enter Your Email</h1>
+  <form id="emailForm">
+    <input type="email" id="emailInput" placeholder="Enter your email" required>
+    <button type="submit">Submit</button>
+  </form>
+  <p id="status"></p>
+
+  <script>
+    // Step 3: Firebase Configuration
+    // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDqVZK3xBkzzsE2GImtQ7UMqLmVDPCUSLM",
+    authDomain: "critiquehub-1b27e.firebaseapp.com",
+    databaseURL: "https://critiquehub-1b27e-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "critiquehub-1b27e",
+    storageBucket: "critiquehub-1b27e.firebasestorage.app",
+    messagingSenderId: "197563169558",
+    appId: "1:197563169558:web:b0f6edc624448076846e37"
+  };
+
+  // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+ 
+    const database = firebase.database();
+
+    // Step 5: Add Submit Event Listener
+    const emailForm = document.getElementById("emailForm");
+    const emailInput = document.getElementById("emailInput");
+    const statusMessage = document.getElementById("status");
+
+    emailForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+
+      if (email) {
+        try {
+          // Save email to Firebase Realtime Database
+          await firebase.database().ref("emails").push({ email });
+          statusMessage.textContent = "Email saved successfully!";
+          emailInput.value = ""; // Clear the input field
+        } catch (error) {
+          console.error("Error saving email:", error);
+          statusMessage.textContent = "Error saving email. Please try again.";
+        }
+      } else {
+        statusMessage.textContent = "Please enter a valid email.";
+      }
+    });
+  </script>
 </body>
 </html>
