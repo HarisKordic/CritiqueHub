@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,114 @@
   <!-- Firebase v8 SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-  <h1>Enter Your Email</h1>
-  <form id="emailForm">
-    <input type="email" id="emailInput" placeholder="Enter your email" required>
-    <button type="submit">Submit</button>
-  </form>
-  <p id="status"></p>
+  <header class="flex justify-center items-center w-full max-h-16 bg-[#F9F9F9] py-3 shadow-md">
+    <img src="logo.png" alt="critiquehub-logo" class="h-12" />
+  </header>
+
+  <section class="py-10 bg-[#F3E5F5]">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl font-semibold text-[#6A1B9A] mb-4">CritiqueHub: Shape the Future of Business Reviews</h1>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+        Sign up today and secure your exclusive <span class="font-bold text-[#6A1B9A]">early adopter benefits</span>! By
+        leaving your email, you’ll join a select group shaping the future of CritiqueHub, Europe’s future go-to platform
+        for business reviews.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-8 bg-white">
+    <div class="container mx-auto px-4 text-center">
+      <form id="emailForm" class="space-y-4 max-w-lg mx-auto">
+        <input type="email" id="emailInput" placeholder="Enter your email" required
+          class="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent" />
+        <button type="submit"
+          class="w-full bg-[#4CAF50] text-white py-3 rounded-md hover:bg-[#45a049] transition">Submit</button>
+        <p id="status" class="text-sm text-gray-500"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="py-10 bg-[#F3E5F5]">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-semibold text-[#6A1B9A] mb-6">Welcome to CritiqueHub</h2>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+        The next big thing in connecting businesses and customers through honest, insightful reviews. We’re building
+        Europe’s go-to platform for sharing your opinions on businesses and products, starting with the Balkan countries
+        and expanding across Europe. You can be part of this journey from the very beginning.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-10 bg-white">
+    <div class="container mx-auto px-4 text-center">
+      <h3 class="text-2xl font-semibold text-[#6A1B9A] mb-6">Why Join Us Early?</h3>
+      <div class="flex flex-wrap justify-center gap-8">
+        <article class="benefit bg-[#F9F9F9] p-6 rounded-lg shadow-lg w-full sm:w-1/2 lg:w-1/3">
+          <h3 class="text-xl font-medium text-[#6A1B9A] mb-4"><span class="font-bold text-[#6A1B9A]">Early Bird
+              Badge</span></h3>
+          <p class="text-gray-700">Display your early adopter status proudly with a unique badge on your profile.</p>
+        </article>
+        <article class="benefit bg-[#F9F9F9] p-6 rounded-lg shadow-lg w-full sm:w-1/2 lg:w-1/3">
+          <h3 class="text-xl font-medium text-[#6A1B9A] mb-4"><span class="font-bold text-[#6A1B9A]">Gift Sponsorship
+              Codes</span></h3>
+          <p class="text-gray-700">Receive 3 exclusive sponsorship codes to gift to business owners you know. Help them
+            kickstart their CritiqueHub presence and enjoy free premium features.</p>
+        </article>
+        <article class="benefit bg-[#F9F9F9] p-6 rounded-lg shadow-lg w-full sm:w-1/2 lg:w-1/3">
+          <h3 class="text-xl font-medium text-[#6A1B9A] mb-4"><span class="font-bold text-[#6A1B9A]">Be Part of a
+              Revolution</span></h3>
+          <p class="text-gray-700">Join us in redefining how Europe discovers and reviews businesses and products.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-10 bg-[#F3E5F5]">
+    <div class="container mx-auto px-4 text-center">
+      <h3 class="text-2xl font-semibold text-[#6A1B9A] mb-6">What is CritiqueHub?</h3>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
+        CritiqueHub combines the best elements of platforms like Yelp, Facebook, and Reddit, tailored to meet the needs
+        of businesses and users across Europe. It offers features such as:
+      </p>
+      <ul class="list-disc text-left text-lg text-gray-700 max-w-3xl mx-auto">
+        <li><span class="font-bold text-[#6A1B9A]">Interactive Reactions from Facebook</span></li>
+        <li><span class="font-bold text-[#6A1B9A]">Threaded Replies from Reddit</span></li>
+        <li><span class="font-bold text-[#6A1B9A]">Comprehensive Business Profiles</span> to showcase products and
+          services</li>
+        <li><span class="font-bold text-[#6A1B9A]">Reviews with Ratings, Comments, Images, and Replies</span></li>
+        <li><span class="font-bold text-[#6A1B9A]">A Messaging System</span> to connect users and businesses seamlessly
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-10 bg-white">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-lg text-gray-700 mb-6">
+        Once you submit your email, you’ll receive updates and more details about the exciting journey ahead. Don’t miss
+        this opportunity to be at the forefront of Europe’s next big review platform.
+      </p>
+      <button id="joinNowButton"
+        class="cta bg-[#4CAF50] text-white py-3 px-6 rounded-md hover:bg-[#45a049] transition">Join CritiqueHub
+        Now</button>
+    </div>
+  </section>
+
+  <!---->
 
   <script>
+    document.getElementById('joinNowButton').addEventListener('click', function () {
+      // Scroll to the top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Focus on the email input field
+      document.getElementById('emailInput').focus();
+    });
+
     // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDqVZK3xBkzzsE2GImtQ7UMqLmVDPCUSLM",
@@ -57,4 +156,5 @@
     });
   </script>
 </body>
+
 </html>
