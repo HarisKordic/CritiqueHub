@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" href="logo.png">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CritiqueHub</title>
   <!-- Firebase v8 SDK -->
@@ -63,9 +66,17 @@
     }
 
     @keyframes floating {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
     }
   </style>
 </head>
@@ -87,7 +98,7 @@
         <span class="block text-4xl mt-2">Driving Real Growth!</span>
       </h1>
       <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-        Join us as an <span class="font-bold text-[#6A1B9A]">early adopter</span> and help shape the future of 
+        Join us as an <span class="font-bold text-[#6A1B9A]">early adopter</span> and help shape the future of
         Europe's premier business review platform. Get exclusive benefits and be part of our journey from day one.
       </p>
     </div>
@@ -100,8 +111,7 @@
           <input type="email" id="emailInput" placeholder="Enter your email address" required
             class="email-input w-full p-4 text-lg border-2 border-gray-200 rounded-full shadow-sm focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent pl-6" />
         </div>
-        <button type="submit"
-          class="cta-button w-full text-white py-4 rounded-full text-lg font-semibold">
+        <button type="submit" class="cta-button w-full text-white py-4 rounded-full text-lg font-semibold">
           Get Early Access
         </button>
         <p id="status" class="text-sm text-gray-500 transition-all duration-300"></p>
@@ -116,17 +126,20 @@
         <article class="card-hover bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
           <div class="text-4xl mb-6 feature-icon">🏆</div>
           <h3 class="text-xl font-bold text-[#6A1B9A] mb-4">Early Bird Badge</h3>
-          <p class="text-gray-700">Stand out with an exclusive early adopter badge that showcases your pioneering spirit.</p>
+          <p class="text-gray-700">Stand out with an exclusive early adopter badge that showcases your pioneering
+            spirit.</p>
         </article>
         <article class="card-hover bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
           <div class="text-4xl mb-6 feature-icon">🎁</div>
           <h3 class="text-xl font-bold text-[#6A1B9A] mb-4">Sponsorship Codes</h3>
-          <p class="text-gray-700">Get 3 exclusive codes to share with business owners, giving them premium features for free.</p>
+          <p class="text-gray-700">Get 3 exclusive codes to share with business owners, giving them premium features for
+            free.</p>
         </article>
         <article class="card-hover bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
           <div class="text-4xl mb-6 feature-icon">🚀</div>
           <h3 class="text-xl font-bold text-[#6A1B9A] mb-4">Shape The Future</h3>
-          <p class="text-gray-700">Help us build Europe's most trusted platform for business reviews and recommendations.</p>
+          <p class="text-gray-700">Help us build Europe's most trusted platform for business reviews and
+            recommendations.</p>
         </article>
       </div>
     </div>
@@ -161,7 +174,8 @@
           <div class="text-3xl feature-icon">📱</div>
           <div>
             <h3 class="text-xl font-bold text-[#6A1B9A] mb-2">Direct Messaging</h3>
-            <p class="text-gray-700">Connect seamlessly with businesses and other users through our messaging system.</p>
+            <p class="text-gray-700">Connect seamlessly with businesses and other users through our messaging system.
+            </p>
           </div>
         </div>
       </div>
@@ -174,7 +188,8 @@
       <p class="text-xl text-gray-700 max-w-3xl mx-auto mb-12" data-aos="fade-up">
         Be part of Europe's next big review platform. Sign up now to secure your early adopter benefits!
       </p>
-      <button onclick="scrollToTop()" class="cta-button text-white px-12 py-4 rounded-full text-lg font-semibold" data-aos="fade-up">
+      <button onclick="scrollToTop()" class="cta-button text-white px-12 py-4 rounded-full text-lg font-semibold"
+        data-aos="fade-up">
         Get Started
       </button>
     </div>
@@ -227,7 +242,7 @@
       if (email) {
         statusMessage.textContent = "Saving...";
         try {
-          await database.ref("emails").push({ 
+          await database.ref("emails").push({
             email,
             timestamp: new Date().toISOString()
           });
