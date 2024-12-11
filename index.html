@@ -4,117 +4,201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Save Email to Firebase</title>
+  <title>CritiqueHub</title>
   <!-- Firebase v8 SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Add AOS library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Add custom styles -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+    }
+
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(106, 27, 154, 0.1);
+    }
+
+    .cta-button {
+      background: linear-gradient(45deg, #4CAF50 0%, #45a049 100%);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+    }
+
+    .email-input {
+      transition: all 0.3s ease;
+    }
+
+    .email-input:focus {
+      transform: scale(1.02);
+    }
+
+    .feature-icon {
+      background: linear-gradient(135deg, #6A1B9A 0%, #8E24AA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
 </head>
 
-<body>
-  <header class="flex justify-center items-center w-full max-h-16 bg-[#F9F9F9] py-3 shadow-md">
-    <img src="logo.png" alt="critiquehub-logo" class="h-12" />
+<body class="overflow-x-hidden">
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <img src="logo.png" alt="critiquehub-logo" class="h-12" />
+      <button id="joinNowButton" class="cta-button text-white px-6 py-2 rounded-full font-medium">
+        Join Now
+      </button>
+    </div>
   </header>
 
-  <section class="py-10 bg-[#F3E5F5]">
-    <div class="container mx-auto px-4 text-center">
-      <h1 class="text-4xl font-semibold text-[#6A1B9A] mb-4">CritiqueHub: Shape the Future of Business Reviews</h1>
-      <p class="text-lg text-gray-700 max-w-3xl mx-auto">
-        Sign up today and secure your exclusive <span class="font-bold text-[#6A1B9A]">early adopter benefits</span>! By
-        leaving your email, you’ll join a select group shaping the future of CritiqueHub, Europe’s future go-to platform
-        for business reviews.
+  <section class="gradient-bg py-20">
+    <div class="container mx-auto px-4 text-center" data-aos="fade-up">
+      <h1 class="text-5xl font-bold text-[#6A1B9A] mb-6 leading-tight">
+        CritiqueHub: Empowering Local Businesses
+        <span class="block text-4xl mt-2">Driving Real Growth!</span>
+      </h1>
+      <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        Join us as an <span class="font-bold text-[#6A1B9A]">early adopter</span> and help shape the future of 
+        Europe's premier business review platform. Get exclusive benefits and be part of our journey from day one.
       </p>
     </div>
   </section>
 
-  <section class="py-8 bg-white">
+  <section class="py-16 bg-white">
     <div class="container mx-auto px-4 text-center">
-      <form id="emailForm" class="space-y-4 max-w-lg mx-auto">
-        <input type="email" id="emailInput" placeholder="Enter your email" required
-          class="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent" />
+      <form id="emailForm" class="space-y-6 max-w-lg mx-auto" data-aos="fade-up">
+        <div class="relative">
+          <input type="email" id="emailInput" placeholder="Enter your email address" required
+            class="email-input w-full p-4 text-lg border-2 border-gray-200 rounded-full shadow-sm focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent pl-6" />
+        </div>
         <button type="submit"
-          class="w-full bg-[#4CAF50] text-white py-3 rounded-md hover:bg-[#45a049] transition">Submit</button>
-        <p id="status" class="text-sm text-gray-500"></p>
+          class="cta-button w-full text-white py-4 rounded-full text-lg font-semibold">
+          Get Early Access
+        </button>
+        <p id="status" class="text-sm text-gray-500 transition-all duration-300"></p>
       </form>
     </div>
   </section>
 
-  <section class="py-10 bg-[#F3E5F5]">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-semibold text-[#6A1B9A] mb-6">Welcome to CritiqueHub</h2>
-      <p class="text-lg text-gray-700 max-w-3xl mx-auto">
-        The next big thing in connecting businesses and customers through honest, insightful reviews. We’re building
-        Europe’s go-to platform for sharing your opinions on businesses and products, starting with the Balkan countries
-        and expanding across Europe. You can be part of this journey from the very beginning.
-      </p>
-    </div>
-  </section>
-
-  <section class="py-10 bg-white">
-    <div class="container mx-auto px-4 text-center">
-      <h3 class="text-2xl font-semibold text-[#6A1B9A] mb-6">Why Join Us Early?</h3>
-      <div class="flex flex-wrap justify-center gap-8">
-        <article class="benefit bg-[#F9F9F9] p-6 rounded-lg shadow-lg w-full sm:w-1/2 lg:w-1/3">
-          <h3 class="text-xl font-medium text-[#6A1B9A] mb-4"><span class="font-bold text-[#6A1B9A]">Early Bird
-              Badge</span></h3>
-          <p class="text-gray-700">Display your early adopter status proudly with a unique badge on your profile.</p>
+  <section class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 text-center" data-aos="fade-up">
+      <h2 class="text-4xl font-bold text-[#6A1B9A] mb-8">Why Choose CritiqueHub?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <article class="card-hover bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+          <div class="text-4xl mb-6 feature-icon">🏆</div>
+          <h3 class="text-xl font-bold text-[#6A1B9A] mb-4">Early Bird Badge</h3>
+          <p class="text-gray-700">Stand out with an exclusive early adopter badge that showcases your pioneering spirit.</p>
         </article>
-        <article class="benefit bg-[#F9F9F9] p-6 rounded-lg shadow-lg w-full sm:w-1/2 lg:w-1/3">
-          <h3 class="text-xl font-medium text-[#6A1B9A] mb-4"><span class="font-bold text-[#6A1B9A]">Gift Sponsorship
-              Codes</span></h3>
-          <p class="text-gray-700">Receive 3 exclusive sponsorship codes to gift to business owners you know. Help them
-            kickstart their CritiqueHub presence and enjoy free premium features.</p>
+        <article class="card-hover bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-4xl mb-6 feature-icon">🎁</div>
+          <h3 class="text-xl font-bold text-[#6A1B9A] mb-4">Sponsorship Codes</h3>
+          <p class="text-gray-700">Get 3 exclusive codes to share with business owners, giving them premium features for free.</p>
         </article>
-        <article class="benefit bg-[#F9F9F9] p-6 rounded-lg shadow-lg w-full sm:w-1/2 lg:w-1/3">
-          <h3 class="text-xl font-medium text-[#6A1B9A] mb-4"><span class="font-bold text-[#6A1B9A]">Be Part of a
-              Revolution</span></h3>
-          <p class="text-gray-700">Join us in redefining how Europe discovers and reviews businesses and products.</p>
+        <article class="card-hover bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
+          <div class="text-4xl mb-6 feature-icon">🚀</div>
+          <h3 class="text-xl font-bold text-[#6A1B9A] mb-4">Shape The Future</h3>
+          <p class="text-gray-700">Help us build Europe's most trusted platform for business reviews and recommendations.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="py-10 bg-[#F3E5F5]">
-    <div class="container mx-auto px-4 text-center">
-      <h3 class="text-2xl font-semibold text-[#6A1B9A] mb-6">What is CritiqueHub?</h3>
-      <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
-        CritiqueHub combines the best elements of platforms like Yelp, Facebook, and Reddit, tailored to meet the needs
-        of businesses and users across Europe. It offers features such as:
-      </p>
-      <ul class="list-disc text-left text-lg text-gray-700 max-w-3xl mx-auto pl-3">
-        <li><span class="font-bold text-[#6A1B9A]">Interactive Reactions from Facebook</span></li>
-        <li><span class="font-bold text-[#6A1B9A]">Threaded Replies from Reddit</span></li>
-        <li><span class="font-bold text-[#6A1B9A]">Comprehensive Business Profiles</span> to showcase products and
-          services</li>
-        <li><span class="font-bold text-[#6A1B9A]">Reviews with Ratings, Comments, Images, and Replies</span></li>
-        <li><span class="font-bold text-[#6A1B9A]">A Messaging System</span> to connect users and businesses seamlessly
-        </li>
-      </ul>
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4" data-aos="fade-up">
+      <h2 class="text-4xl font-bold text-[#6A1B9A] mb-12 text-center">Platform Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div class="flex items-start space-x-4" data-aos="fade-right">
+          <div class="text-3xl feature-icon">💬</div>
+          <div>
+            <h3 class="text-xl font-bold text-[#6A1B9A] mb-2">Interactive Discussions</h3>
+            <p class="text-gray-700">Engage in meaningful conversations with threaded replies and reactions.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4" data-aos="fade-left">
+          <div class="text-3xl feature-icon">👥</div>
+          <div>
+            <h3 class="text-xl font-bold text-[#6A1B9A] mb-2">Business Profiles</h3>
+            <p class="text-gray-700">Comprehensive profiles showcasing products, services, and customer experiences.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4" data-aos="fade-right">
+          <div class="text-3xl feature-icon">⭐</div>
+          <div>
+            <h3 class="text-xl font-bold text-[#6A1B9A] mb-2">Rich Reviews</h3>
+            <p class="text-gray-700">Share detailed reviews with ratings, photos, and follow-up discussions.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4" data-aos="fade-left">
+          <div class="text-3xl feature-icon">📱</div>
+          <div>
+            <h3 class="text-xl font-bold text-[#6A1B9A] mb-2">Direct Messaging</h3>
+            <p class="text-gray-700">Connect seamlessly with businesses and other users through our messaging system.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="py-10 bg-white">
+  <section class="gradient-bg py-20">
     <div class="container mx-auto px-4 text-center">
-      <p class="text-lg text-gray-700 mb-6">
-        Once you submit your email, you’ll receive updates and more details about the exciting journey ahead. Don’t miss
-        this opportunity to be at the forefront of Europe’s next big review platform.
+      <h2 class="text-4xl font-bold text-[#6A1B9A] mb-8" data-aos="fade-up">Ready to Join?</h2>
+      <p class="text-xl text-gray-700 max-w-3xl mx-auto mb-12" data-aos="fade-up">
+        Be part of Europe's next big review platform. Sign up now to secure your early adopter benefits!
       </p>
-      <button id="joinNowButton"
-        class="cta bg-[#4CAF50] text-white py-3 px-6 rounded-md hover:bg-[#45a049] transition">Join CritiqueHub
-        Now</button>
+      <button onclick="scrollToTop()" class="cta-button text-white px-12 py-4 rounded-full text-lg font-semibold" data-aos="fade-up">
+        Get Started
+      </button>
     </div>
   </section>
-
-  <!---->
 
   <script>
-    document.getElementById('joinNowButton').addEventListener('click', function () {
-      // Scroll to the top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Focus on the email input field
-      document.getElementById('emailInput').focus();
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true
     });
+
+    // Smooth scroll to top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      setTimeout(() => {
+        document.getElementById('emailInput').focus();
+      }, 1000);
+    }
+
+    document.getElementById('joinNowButton').addEventListener('click', scrollToTop);
 
     // Firebase configuration
     const firebaseConfig = {
@@ -131,7 +215,7 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
-    // Add submit event listener
+    // Enhanced form submission
     const emailForm = document.getElementById("emailForm");
     const emailInput = document.getElementById("emailInput");
     const statusMessage = document.getElementById("status");
@@ -141,17 +225,23 @@
       const email = emailInput.value.trim();
 
       if (email) {
+        statusMessage.textContent = "Saving...";
         try {
-          // Save email to Firebase Realtime Database
-          await database.ref("emails").push({ email });
-          statusMessage.textContent = "Email saved successfully!";
-          emailInput.value = ""; // Clear the input field
+          await database.ref("emails").push({ 
+            email,
+            timestamp: new Date().toISOString()
+          });
+          statusMessage.textContent = "Welcome aboard! Check your email soon for exclusive updates.";
+          statusMessage.className = "text-green-600 font-medium mt-4";
+          emailInput.value = "";
         } catch (error) {
           console.error("Error saving email:", error);
-          statusMessage.textContent = "Error saving email. Please try again.";
+          statusMessage.textContent = "Oops! Something went wrong. Please try again.";
+          statusMessage.className = "text-red-600 font-medium mt-4";
         }
       } else {
-        statusMessage.textContent = "Please enter a valid email.";
+        statusMessage.textContent = "Please enter a valid email address.";
+        statusMessage.className = "text-red-600 font-medium mt-4";
       }
     });
   </script>
